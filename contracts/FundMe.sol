@@ -78,7 +78,7 @@ contract FundMe {
         _;
     }
 
-    //What happens if someone sends this contract ETH without calling the fund fuction?
+    //What happens if someone sends this contract ETH without calling fund()?
     //receive()
     //fallback()
 

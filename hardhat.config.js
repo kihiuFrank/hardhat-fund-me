@@ -44,6 +44,9 @@ module.exports = {
             chainId: 31337,
         },
     },
+    etherscan: {
+        apiKey: ETHERSCAN_API_KEY,
+    },
     namedAccounts: {
         deployer: {
             default: 0,
