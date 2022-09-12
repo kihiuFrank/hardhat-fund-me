@@ -1,3 +1,8 @@
+// IF YOU GOING THROUGH THIS CODE, SORRY FOR THE MANY COMMENTS.
+// THEY ARE THERE FOR LEARNING/REFERENCE PURPOSES.
+// READABILITY WAS NOT A PRIORITY IN THIS CASE.
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 const { network } = require("hardhat")
 const { networkConfig, developmentChains } = require("../helper-hardhat-config")
 //same as

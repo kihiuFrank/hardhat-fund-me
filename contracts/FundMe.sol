@@ -1,32 +1,80 @@
+// IF YOU GOING THROUGH THIS CODE, SORRY FOR THE MANY COMMENTS.
+// THEY ARE THERE FOR LEARNING/REFERENCE PURPOSES.
+// READABILITY WAS NOT A PRIORITY IN THIS CASE.
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //Get Funds From Users
 //Withdraw Funds
 //Set a minimum funding value in USD
 
 // SPDX-License-Identifier: GPL-3.0
-
+// 1. Pragma
 pragma solidity ^0.8.7;
-
+// 2. Imports
 import "./PriceConverter.sol";
+import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
-error NotOwner();
+// 3. Interfaces, Libraries, Contracts
+error FundMe__NotOwner();
 
+/** @title A contract for crowd funding
+ * @author Kihiu Frank
+ * @notice This contract is to demo a sample funding contract
+ * @dev This implements price feeds as our library
+ */
 contract FundMe {
+    // Type Declarations
     using PriceConverter for uint256;
 
+    // State variables
     uint256 public constant MINIMUM_USD = 50 * 1e18;
-
     address[] public funders;
     mapping(address => uint256) public addressToAmountFunded;
-
     address public immutable i_owner;
-
     AggregatorV3Interface public priceFeed;
+
+    // Events (we have none!)
+
+    // Modifiers
+    modifier onlyOwner() {
+        //require(msg.sender == i_owner, "Sender is not owner");
+        if (msg.sender != i_owner) {
+            revert FundMe__NotOwner();
+        }
+        _;
+    }
+
+    // Functions Order:
+    //// constructor
+    //// receive
+    //// fallback
+    //// external
+    //// public
+    //// internal
+    //// private
+    //// view / pure
 
     constructor(address priceFeedAddress) {
         i_owner = msg.sender;
         priceFeed = AggregatorV3Interface(priceFeedAddress);
     }
 
+    //What happens if someone sends this contract ETH without calling fund()?
+    //receive()
+    //fallback()
+
+    receive() external payable {
+        fund();
+    }
+
+    fallback() external payable {
+        fund();
+    }
+
+    /**
+     * @notice This function funds this contract
+     * @dev This implements price feeds as our library
+     */
     function fund() public payable {
         //Want to be able to set minimum fund amount in USD
         // 1. How do we send ETH to this contract
@@ -68,25 +116,5 @@ contract FundMe {
             value: address(this).balance
         }("");
         require(callSuccess, "Call Failed!");
-    }
-
-    modifier onlyOwner() {
-        //require(msg.sender == i_owner, "Sender is not owner");
-        if (msg.sender != i_owner) {
-            revert NotOwner();
-        }
-        _;
-    }
-
-    //What happens if someone sends this contract ETH without calling fund()?
-    //receive()
-    //fallback()
-
-    receive() external payable {
-        fund();
-    }
-
-    fallback() external payable {
-        fund();
     }
 }
