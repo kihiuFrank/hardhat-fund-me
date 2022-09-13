@@ -38,9 +38,7 @@ contract FundMe {
     // Modifiers
     modifier onlyOwner() {
         //require(msg.sender == i_owner, "Sender is not owner");
-        if (msg.sender != i_owner) {
-            revert FundMe__NotOwner();
-        }
+        if (msg.sender != i_owner) revert FundMe__NotOwner();
         _;
     }
 
@@ -81,7 +79,7 @@ contract FundMe {
 
         require(
             msg.value.getConversionRate(priceFeed) >= MINIMUM_USD,
-            "Didn't send enough!"
+            "Didn't send enough!" //error message if require fails
         ); // 1e18 = 1*10 ** 18 == 1000000000000000000
         // this has 18 decimals
 
@@ -89,7 +87,7 @@ contract FundMe {
         addressToAmountFunded[msg.sender] += msg.value;
     }
 
-    function Withdraw() public onlyOwner {
+    function withdraw() public onlyOwner {
         /* starting Index, ending index, step amount */
         for (
             uint256 funderIndex = 0;
