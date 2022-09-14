@@ -1,6 +1,7 @@
 {
   "name": "hardhat-fund-me",
   "version": "1.0.0",
+  "author": "Frankline kihiu",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
@@ -24,7 +25,15 @@
     "hardhat-gas-reporter": "^1.0.8",
     "prettier": "^2.7.1",
     "solhint": "^3.3.7",
-    "solidity-coverage": "^0.7.21",
+    "solidity-coverage": "^0.8.2",
     "typechain": "^8.1.0"
+  },
+  "scripts": {
+    "test": "hardhat test",
+    "test:staging": "hardhat test --network rinkeby",
+    "lint": "solhint 'contracts/*.sol'",
+    "lint:fix": "solhint 'contracts/*.sol' --fix",
+    "format": "prettier --write .",
+    "coverage": "hardhat coverage"
   }
 }

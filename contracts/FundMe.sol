@@ -7,9 +7,9 @@
 //Withdraw Funds
 //Set a minimum funding value in USD
 
-// SPDX-License-Identifier: GPL-3.0
+// SPDX-License-Identifier: MIT
 // 1. Pragma
-pragma solidity ^0.8.7;
+pragma solidity ^0.8.7.0;
 // 2. Imports
 import "./PriceConverter.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";

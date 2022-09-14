@@ -1,6 +1,7 @@
 require("@nomicfoundation/hardhat-toolbox")
 require("hardhat-deploy")
 require("dotenv").config()
+require("solidity-coverage")
 //require("@nomiclabs/hardhat-ethers")
 
 /** @type import('hardhat/config').HardhatUserConfig */
@@ -22,7 +23,7 @@ const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || ""
 module.exports = {
     //solidity: "0.8.7",
     solidity: {
-        compilers: [{ version: "0.8.7" }, { version: "0.6.6" }],
+        compilers: [{ version: "0.8.7.0" }, { version: "0.6.6" }],
     },
     defaultNetwork: "hardhat",
     networks: {
